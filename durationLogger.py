@@ -10,7 +10,7 @@ os.makedirs(base_folder, exist_ok=True)
 current_date = None
 file = None
 
-led_on_time = None
+tool_on_time = None
 
 def get_timestamp():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
@@ -50,18 +50,18 @@ while True:
             continue
 
         if line == "ON":
-            led_on_time = get_timestamp()
-            print("ON :", led_on_time)
+            tool_on_time = get_timestamp()
+            print("ON :", tool_on_time)
 
         elif line == "OFF":
             off_time = get_timestamp()
 
-            if led_on_time:
-                file.write(f"{led_on_time},{off_time}\n")
+            if tool_on_time:
+                file.write(f"{tool_on_time},{off_time}\n")
                 file.flush()
                 print("OFF:", off_time)
 
-            led_on_time = None
+            tool_on_time = None
 
     except KeyboardInterrupt:
         print("\nStopping logger...")
